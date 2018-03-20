@@ -2,7 +2,7 @@
 viivmall-fe
 
 ### 项目初始化
-[项目初始化](https://github.com/viivLgr/viivmall/blob/master/README3.md)
+[项目初始化详细记录](https://github.com/viivLgr/viivmall/blob/master/README3.md)
 - git仓库的建立和项目目录的划分
     1. 新建git项目
     2. git权限配置
