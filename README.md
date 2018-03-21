@@ -50,3 +50,18 @@ viivmall-fe
 - 代码的提交
     1. 代码的提交过程
     2. git的tag用法
+  
+### 通用工具开发
+[通用工具开发详细记录](https://github.com/viivLgr/viivmall/blob/master/README4.md)  
+    
+#### 通用js工具封装
+- 网络请求工具
+- URL路径工具
+- 模板渲染工具--hogan
+- 字段验证 && 通用提示
+- 统一跳转
+
+
+#### 通用UI开发
+- 使用font-awesome
+- 使用Hogan
