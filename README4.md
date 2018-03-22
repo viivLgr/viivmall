@@ -146,3 +146,27 @@ goHome: function(){
         navList: this.option.navList
     });
     ```
+    
+- 页面title使用htmlWebpackPlugin设置
+
+    1. webpack.config.js
+    ```javascript
+    // 获取html-webpack-plugin参数的方法
+    var getHtmlConfig = function (name, title) {
+        return {
+            template: './src/view/' + name + '.html',
+            filename: 'view/' + name + '.html',
+            title: title || '',
+            inject: true,
+            hash: true,
+            chunks: ['common', name]
+        }
+    }
+  
+    // html模板的处理
+    new HtmlWebpackPlugin(getHtmlConfig('index', '首页')),
+    ```
+    2. 页面引用
+    ```html
+    <title><%= htmlWebpackPlugin.options.title%> -- viivmall电商平台</title>
+    ```
