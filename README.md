@@ -66,5 +66,83 @@ viivmall-fe
 - 使用font-awesome
 - 使用Hogan
 
-
 #### [接口文档](http://git.oschina.net/imooccode/happymmallwiki/wikis)
+#### [学习文档](http://learning.happymmall.com/)
+
+#### 生产环境的适配
+- 添加favicon
+    ```
+    // 获取html-webpack-plugin参数的方法
+    var getHtmlConfig = function (name, title) {
+        return {
+            template: './src/view/' + name + '.html',
+            filename: 'view/' + name + '.html',
+            favicon: './favicon.ico',
+            title: title || '',
+            inject: true,
+            hash: true,
+            chunks: ['common', name]
+        }
+    }
+    ```
+- 添加dns-prefetch
+    ```
+    <link rel="dns-prefetch" href="//cdn.bootcss.com">
+    <link rel="dns-prefetch" href="//s.happymmall.com">
+    <link rel="dns-prefetch" href="//img.happymmall.com">
+    ```
+- 线上域名的分离，HTML路径的简化
+    ```
+    // 解决resource路径问题
+    output: {
+        path: __dirname + '/dist/',
+        publicPath: '/dist/',
+        filename: 'js/[name].js'
+    },
+
+    // 打包成线上版本的配置
+    output: {
+        path: __dirname + '/dist/',
+        publicPath: 'dev' === WEBPACK_ENV ? '/dist/' : '//s.happymmall.com/mmall-fe/dist/' ,
+        filename: 'js/[name].js'
+    },
+    ```
+- 对线上打包结果做回归测试
+    1. resource路径问题
+    2. hogan对string的压缩打包默认去掉了“”， 在webpack.config.js中添加配置
+        ```
+        { 
+                test: /\.string$/, 
+                loader: 'html-loader',
+                query: {
+                    minimize: true,
+                    removeAttributeQuotes: false // 不删除引号
+                }
+            },
+        ```
+    3. 注意payment页面接收订单编号参数orderNumber和接口用的参数名要一致
+
+#### SEO
+- 概念：SEO是指在了解**搜索引擎自然排名**机制的基础之上，对网站进行内部及外部的调整优化，改进网站在搜索引擎中**关键词**的自然排名，获得更多的展现量，吸引更多目标客户点击访问网站，从而达到互联网营销及品牌建设的目标。
+- 衡量标准
+    1. 关键词排名
+    2. 收录量
+- 优化技巧
+    1. 增加页面数量
+    2. 减少页面层级
+    3. 关键词密度
+    4. 高质量友链
+    5. 分析竞对
+    6. SEO数据监控
+- 关键词设计
+    1. 品牌、slogan：mmall， happymmall, mmall电商
+    2. 高频关键词：电商平台，网上购物，网上商城，数码产品，手机，笔记本，相机，手表，耳机
+    3. 长尾关键词： 肚子疼怎么办
+
+#### 访问数据统计
+- 访问量，PV(页面打开的次数)/UV（访问的总人数）/VV（访问次数）
+- 流量来源
+- 搜索关键词
+- 设备信息
+- 百度统计
+    账号viivlgr 密码123
