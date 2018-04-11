@@ -46,6 +46,10 @@
     - `:wq!` 强制保存退出
     - `exit` 退出使用viiv登录
     - `ssh viiv@47.104.161.190` 重新连接服务器
+- 将用户添加到root组
+    `sudo usermod -g root viiv`
+- 将文件夹整体给viiv权限
+    `sudo chown -R viiv /developer/`
 
 - 下载安装
     1. 准备目录
@@ -178,7 +182,7 @@
     - `git config --global core.autocrlf false` 设置忽略Windows和mac不同电脑换行符转换
     - `git config --global core.quotepath off` 配置编码 避免中文乱码
     - `git config --global gui.encoding utf-8` 配置gui
-    - `ssh-keygen -t rsa -C "viiv_lgr@163.com"`
+    - `ssh-keygen -t rsa -C "viiv_lgr@163.com"` 生成ssh密钥
     - `ssh-add ~/.ssh/id_rsa` Could not open a connection to your authentication agent.
     - `eval `ssh-agent`   `      Agent pid 15607
     - `ssh-add ~/.ssh/id_rsa`   Identity added: /usr/viiv/.ssh/id_rsa (/usr/viiv/.ssh/id_rsa)
@@ -210,6 +214,44 @@
     - `sudo chmod u+x -R /developer/` 给拥有者执行权限
     - `cd /developer/git-repository/` 进入git目录
     - `git clone git@gitee.com:viivmall/viivmall-fe.git` 克隆代码
+    11. 安装node
+    - `wget https://nodejs.org/download/release/v4.4.7/node-v4.4.7-linux-x64.tar.gz`
+    - `tar -xzvf node` 解压
+    - `cd /usr/local`
+    - `sudo mv ~/node-v4.4.7-linux-x64 ./`
+    - `vim /etc/profile`
+    - `export NODE_HOME=/usr/local/node-v4.4.7-linux-x64`
+    - `export PATH=$PATH:$JAVA_HOME/bin:/usr/local/git/bin:$CATALINA_HOME/bin:$MAVEN_HOME/bin:$NODE_HOME/bin`
+    12. 安装webpack
+    - `npm install webpack@1.15.0 -g --registry=https://registry.npm.taobao.org` 安装webpack
+    - `webpack -v`
+    13. 安装ruby
+    - `sudo yum install ruby`
+    14. 安装sass
+    - `sudo yum install rubygems` 安装rubygems
+    - `gem -v` 1.3.7
+    - `sudo su -c "gem install sass"`
+    15. 前端发布
+    - `cd /developer/git-repository`
+    - `git clone git@gitee.com:viivmall/viivmall-fe.git`
+    - 创建pull-request
+    - `git merge viivmall_v1.0 ` 合并
+    - `vim README.md` 解决冲突文件
+    - `git add .` 提交
+    - `git commit -am "conflict"`
+    
+    - `cp -R /developer/git-repository/viivmall-fe/dist/ ./viivmall-fe/` 移动打包后的dist文件到product/frontend/viivmall-fe
+    16. 编辑发布脚本
+    17. 配置快捷发布
+    - `cd ` 进去到~目录
+    - `vim .bash_profile` 编辑
+    - `alias dpmall-fe="/developer/fe-deploy.sh viivmall-fe"`
+    - `alias dpadmin-fe="/developer/fe-deploy.sh admin-fe"`
+    - `source .bash_profile` 使之生效
+    - `dpmall-fe` 执行发布
+    
+    
+    
 
 
 
